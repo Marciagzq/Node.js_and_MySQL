@@ -50,15 +50,16 @@ function runSearch(products) {
         type: "input",
         name: "quant",
         message: "How many of are you looking to buy?",
-        //create an array of 15 choices without hard coding it.
+     
     }
     ]).then(function(answer) {
-        console.log(JSON.stringify(answer));
+        // console.log(JSON.stringify(answer));
         quantitySearch(answer.options, answer.quant);
                    
     })
 };
 
+//This function is rest the quantity selected from the current stock quantity
   function quantitySearch(userSelection, quantity) {
       debugger;
     connection.query("SELECT stock_quantity FROM products WHERE product_name = '" + userSelection + "'", function(err, res) {
@@ -68,17 +69,30 @@ function runSearch(products) {
 
       if(userQuantity < productQuantity){
         var remainder = productQuantity - userQuantity;
-        console.log(remainder);
-        update(userSelection,remainder)
+        // console.log(remainder);
+        update(userSelection,remainder, userQuantity)
       }else{
           console.log("Insufficient quantity!");
+          connection.end();
       }
     });
   }
 
-  function update(userSelection, quantity) {
+  //This function will update our data base on the workbench
+  function update(userSelection, quantity, userQuantity) {
     connection.query("UPDATE products SET stock_quantity = " + quantity + " WHERE product_name = '" + userSelection + "'" , function(err, res) {
       if (err) throw err;
-      console.log("Quantity updated");
+      getPrice(userSelection, userQuantity);
     });
+  }
+
+  //This function will get the total price of the selected product && quantity
+  function getPrice(userSelection, quantity) {
+    connection.query("SELECT price FROM products WHERE product_name = '" + userSelection + "'", function(err, res) {
+        if (err) throw err;
+        // console.log("The costs will be " + res[0].price);
+        console.log("Product adeed to your cart");
+        console.log("Your total price is " + (res[0].price * quantity).toFixed(2));
+        connection.end();
+    })    
   }
