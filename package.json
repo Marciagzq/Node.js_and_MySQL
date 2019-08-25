@@ -1,0 +1,26 @@
+{
+  "name": "node.js_and_mysql",
+  "version": "1.0.0",
+  "description": "![alt text](https://portfolium1.cloudimg.io/s/crop/128x128/https://cdn.portfolium.com/ugcs3%2Fedu%2F9tDF4wvqRdewUvBbZ97x_PegasusBrightGold150x150.png \"Logo Title Text 1\") - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+  "main": "bamazonCustomer.js",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.0.0",
+    "mysql": "^2.17.1",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marciagzq/Node.js_and_MySQL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marciagzq/Node.js_and_MySQL/issues"
+  },
+  "homepage": "https://github.com/Marciagzq/Node.js_and_MySQL#readme"
+}
