@@ -21,36 +21,64 @@ var connection = mySQL.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
-    getProducts();
+    productSearch();
   });
-  
-  function getProducts() {
-    connection.query("SELECT * FROM products", function(err, res) {
-      if (err) throw err;
-      console.log(res);
-      connection.end();
-    });
-  }
 
-//   //PROBABLY WILL BE IN A DIFFERENT FOLDER 
+  function productSearch() {
+      connection.query("SELECT product_name FROM products", function(err, res) {
+        if (err) throw err;
+      //console.log(res);
+        var resChoices = [];
+        for(var i = 0; i < res.length; i++){
+           resChoices.push(res[i].product_name)
+        }
+      //console.log(resChoices);
+      runSearch(resChoices);
+      });
+    }
 
-// User interaction from the inquirer
-inquirer
+function runSearch(products) {
+    inquirer
     .prompt([
     {
         type: "list",
         name: "options",
         message: "What are you looking for today?",
-        choices: []
-        //loop through the items on the table
+        choices: products
     },
     {
-        type: "list",
+        type: "input",
         name: "quant",
-        message: "How many of: " +       + "are you looking to buy?",
-        choices: []
+        message: "How many of are you looking to buy?",
         //create an array of 15 choices without hard coding it.
     }
-    ])
+    ]).then(function(answer) {
+        console.log(JSON.stringify(answer));
+        quantitySearch(answer.options, answer.quant);
+                   
+    })
+};
 
+  function quantitySearch(userSelection, quantity) {
+      debugger;
+    connection.query("SELECT stock_quantity FROM products WHERE product_name = '" + userSelection + "'", function(err, res) {
+      if (err) throw err;
+        var userQuantity = parseInt(quantity);
+        var productQuantity = parseInt(res[0].stock_quantity);
 
+      if(userQuantity < productQuantity){
+        var remainder = productQuantity - userQuantity;
+        console.log(remainder);
+        update(userSelection,remainder)
+      }else{
+          console.log("Insufficient quantity!");
+      }
+    });
+  }
+
+  function update(userSelection, quantity) {
+    connection.query("UPDATE products SET stock_quantity = " + quantity + " WHERE product_name = '" + userSelection + "'" , function(err, res) {
+      if (err) throw err;
+      console.log("Quantity updated");
+    });
+  }
