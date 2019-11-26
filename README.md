@@ -1,5 +1,5 @@
-#University of Central Florida
-###Coding Bootcamp 
+# University of Central Florida
+### Coding Bootcamp 
 #### Full Stack Developer 
 ![alt text](https://portfolium1.cloudimg.io/s/crop/128x128/https://cdn.portfolium.com/ugcs3%2Fedu%2F9tDF4wvqRdewUvBbZ97x_PegasusBrightGold150x150.png "Logo Title Text 1")
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -8,10 +8,10 @@
 ### BAMAZON
 
 
-#####What does it make Bamazon so cool?
+##### What does it make Bamazon so cool?
 Bamazon.com, Inc., is an American multinational technology company created on UCF Bootcamp, Washington that focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence. It is considered one of the Big Four technology companies along with Google, Apple, and Facebook. 
 
-#####Get Ready
+##### Get Ready
 
 Before trying to run this app you must have **install the following npm packages**:
 
